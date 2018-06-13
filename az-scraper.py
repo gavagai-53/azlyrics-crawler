@@ -31,6 +31,8 @@ for url in urls:
     soup = bs(read_lyrics)
 
     # Perhaps to make it harder to scrape, AZLyrics doesn't add any class or id to their lyrics.
+    # Also, I replace single quotes in contractions (e.g. I'll, You're) to make it easier to analyze after.
+    # Doing this now makes the regex easier below. 
     lyrics = soup.find_all("div", attrs={"class": None, "id": None})[0].text.replace('\'','-')
 
     # Let's use a quick regex to get the words individually
